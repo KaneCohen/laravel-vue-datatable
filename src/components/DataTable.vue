@@ -133,6 +133,7 @@ export default {
         return {
             debounceGetData: () => {},
             tableData: {},
+            page: parseInt(this.currentPage),
             sortKey: 'id',
             sortOrders: {},
             draw: 0,
@@ -322,7 +323,7 @@ export default {
             type: String,
             default: "",
         },
-        page: {
+        currentPage: {
             type: [Number, String],
             default: 1,
         },
