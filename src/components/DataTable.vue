@@ -141,7 +141,7 @@ export default {
                 dir: this.orderDir,
                 column: this.orderBy,
                 filters: this.filters,
-                length: this.length || this.perPage[0],
+                length: parseInt(this.length) || this.perPage[0],
             },
         };
     },
@@ -323,7 +323,7 @@ export default {
             default: "",
         },
         page: {
-            type: Number,
+            type: [Number, String],
             default: 1,
         },
         search: {
@@ -358,7 +358,7 @@ export default {
             }),
         },
         length: {
-            type: Number,
+            type: [Number, String],
             default: 10,
         },
         perPage: {
