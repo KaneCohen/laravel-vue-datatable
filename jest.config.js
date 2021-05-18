@@ -7,4 +7,3 @@ module.exports = {
     "<rootDir>/__tests__/bootstrap.*"
   ]
 }
-  
