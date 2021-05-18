@@ -43,7 +43,7 @@ export default {
         dir: {
             type: String,
             default: '',
-        },  
+        },
         columns: {
             type: Array,
             default: () => ([]),

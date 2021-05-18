@@ -19,7 +19,7 @@
                 :placeholder-search="translate.placeholderSearch">
             </laravel-vue-data-table-filters>
         </slot>
-        
+
         <!-- Table component -->
         <laravel-vue-table
             @sort="sortBy"
@@ -61,7 +61,7 @@
                         v-for="(item, rowIndex) in tableData.data"
                         @click="$emit('row-clicked', item)"
                         class="laravel-vue-datatable-tbody-tr">
-                        <td 
+                        <td
                             :key="column.name"
                             class="laravel-vue-datatable-td"
                             :class="bodyCellClasses(column)"
@@ -95,7 +95,7 @@
             :meta="tableData.meta"
             :links="tableData.links"
             :loadDiffrentPage="loadDiffrentPage">
-            
+
             <tailable-pagination
                 :data="tableData"
                 :showNumbers="true"
@@ -136,13 +136,12 @@ export default {
             sortKey: 'id',
             sortOrders: {},
             draw: 0,
-            page: 1,
             tableProps: {
-                search: '',
+                search: this.search,
                 dir: this.orderDir,
                 column: this.orderBy,
                 filters: this.filters,
-                length: this.perPage[0],
+                length: this.length || this.perPage[0],
             },
         };
     },
@@ -194,12 +193,12 @@ export default {
             }
         }
     },
-    
+
     methods: {
         async getData(url = this.url, options = this.getRequestPayload) {
 
             this.$emit("loading");
-            
+
             //Remove any custom query string parameters
             let baseUrl = url.split("?")[0];
 
@@ -209,16 +208,16 @@ export default {
                 });
 
             if (response) {
-                
+
                 if (this.checkTableDraw(response.data.payload.draw)) {
-                    
+
                     this.draw++;
                     this.tableData = response.data;
-                    
+
                     if (this.addFiltersToUrl) {
                         this.updateParameters(this.tableProps);
                     }
-                    
+
                     this.$emit("finished-loading");
                 }
             }
@@ -271,7 +270,7 @@ export default {
             );
         }
     },
-    
+
     computed: {
         bodySlot() {
             if (this.$scopedSlots) {
@@ -301,7 +300,7 @@ export default {
             const defaults = require("lodash.defaultsdeep");
 
             if (this.framework === "tailwind") {
-                return defaults(this.classes, (window.LaravelVueDatatable || {}).classes || {}, TailwindTableTheme); 
+                return defaults(this.classes, (window.LaravelVueDatatable || {}).classes || {}, TailwindTableTheme);
             }
 
             let bootstrapTheme = BootstrapTableTheme;
@@ -310,7 +309,7 @@ export default {
                 bootstrapTheme.table["table-dark"] = true;
             }
 
-            return defaults(this.classes, (window.LaravelVueDatatable || {}).classes || {}, bootstrapTheme); 
+            return defaults(this.classes, (window.LaravelVueDatatable || {}).classes || {}, bootstrapTheme);
         }
     },
     props: {
@@ -322,6 +321,14 @@ export default {
         url: {
             type: String,
             default: "",
+        },
+        page: {
+            type: Number,
+            default: 1,
+        },
+        search: {
+            type: String,
+            default: '',
         },
         orderBy: {
             type: String,
@@ -349,6 +356,10 @@ export default {
                 limit: 1,
                 align: 'right',
             }),
+        },
+        length: {
+            type: Number,
+            default: 10,
         },
         perPage: {
             type: Array,
