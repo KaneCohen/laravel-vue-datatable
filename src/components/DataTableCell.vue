@@ -45,8 +45,13 @@ export default {
             if (handle.length > 1) {
                 columnData = this.value;
 
-                handle.forEach(item => {
-                    columnData = columnData[item];
+                handle.every(item => {
+                    if (columnData[item]) {
+                        columnData = columnData[item];
+                        return true;
+                    }
+                    columnData = null;
+                    return false;
                 });
             } else {
                 columnData = this.value[this.name];
