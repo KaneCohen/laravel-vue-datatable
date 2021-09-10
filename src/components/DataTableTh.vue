@@ -71,7 +71,7 @@ export default {
             return MergeClasses(
                 typeof column.columnClasses === "object" && column.columnClasses["!override"] ? {} : this.classes,
                 {"table-header-sorting": column.orderable},
-                column.columnClasses || {}, 
+                column.columnClasses || {},
                 (column.columnClasses || {}).th || {}
             );
         },
