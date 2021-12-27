@@ -1,6 +1,6 @@
 {
   "name": "@kanecohen/laravel-vue-datatable",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "Vue.js datatable made with Laravel and Bootstrap in mind",
   "author": "James Dordoy <jamesdordoy@gmail.com>",
   "homepage": "https://gitub.com/KaneCohen/laravel-vue-datatable/",
