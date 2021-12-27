@@ -134,7 +134,7 @@ export default {
             debounceGetData: () => {},
             tableData: {},
             page: parseInt(this.currentPage),
-            sortKey: 'id',
+            sortKey: this.orderBy,
             sortOrders: {},
             draw: 0,
             tableProps: {

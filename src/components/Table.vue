@@ -33,13 +33,17 @@ import MergeClasses from "../functions/MergeClasses";
 export default {
     data() {
         return {
-            currentSortColumn: '',
+            currentSortColumn: this.sortKey,
         };
     },
     components: {
         LaravelVueDataTableTh
     },
     props: {
+        sortKey: {
+            type: String,
+            default: '',
+        },
         dir: {
             type: String,
             default: '',
